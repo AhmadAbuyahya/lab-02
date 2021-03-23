@@ -7,25 +7,26 @@ this.keyword=keyword;
 this.horns=horns;
 }
 let keywords = [];
-Animal.prototype.render=function(){
-    let photoTemplate=$('#photo-template').clone();
-    $('main').append(photoTemplate);
-    photoTemplate.find('h2').text(this.title);
-    photoTemplate.find('p').text(this.description);
-    photoTemplate.find('img').attr('src',this.image_url);
-    photoTemplate.attr('class',this.keyword);
 
-    photoTemplate.removeAttr('id');
+Animal.prototype.render=function(){
+    let template = $('#mustache-template').html();
+    let html = Mustache.render(template, this);
+    return html;
+}
+Animal.prototype.renderSelect=function(){
     if (keywords.includes(this.keyword) !== true) {
         keywords.push(this.keyword);
         $('select').append(`<option value="${this.keyword}">${this.keyword}</option>`);
     }
+    $('.template').attr('class',this.keyword);
 }
 $('select').on('change', function() {
-    let selectedKey = '.' + this.value;
-    console.log(this.value);
+    if(this.value==="default"){
+        $('section').show();
+    }
+    else {let selectedKey = '.' + this.value;
     $('section').hide();
-    $(selectedKey).show();
+    $(selectedKey).show();}
 });
 
 function getData() {
@@ -36,9 +37,37 @@ function getData() {
     $.ajax('data/page-01.json', ajaxSettings).then(data=> {
         data.forEach(element=> {
             let Obj = new Animal(element.image_url,element.title,element.description,element.keyword,element.horns);
-            Obj.render();
+            let html = Obj.render()
+            $('main').append(html);
+            Obj.renderSelect();
         });
     })
     
 }
+function getData2() {
+    const ajaxSettings = {
+        method: 'get',
+        dataType: 'json'
+    };
+    $.ajax('data/page-02.json', ajaxSettings).then(data=> {
+        data.forEach(element=> {
+            let Obj = new Animal(element.image_url,element.title,element.description,element.keyword,element.horns);
+            let html = Obj.render();
+            $('main').append(html);
+            $(html.section).addClass('fromPage2');
+            console.log(html);
+            Obj.renderSelect();
+        });
+    })
+}
+function renderButtons(){
+    $('header').append("<button>Page 01</button><button>Page 02</button>");
+    $('button:first-of-type').attr('id','button01');
+    $('button:last-of-type').attr('id','button02');    
+}
+function clickButton01(){
+
+}
+renderButtons();
 $('document').ready(getData);
+$('document').ready(getData2);

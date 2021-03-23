@@ -5,3 +5,9 @@ img {
 #photo-template{
     display: none;
 }
+#button02{
+    color: rgb(4, 0, 255);
+}
+#button01{
+    color: crimson;
+}
