@@ -31,7 +31,7 @@ function getData() {
         method: 'get',
         dataType: 'json'
     };
-    $.ajax('data/page-01.json', ajaxSettings).then(data => {
+    $.ajax('data/page-02.json', ajaxSettings).then(data => {
         data.forEach(element => {
             let Obj = new Animal(element.image_url, element.title, element.description, element.keyword, element.horns);
             objArray.push(Obj);

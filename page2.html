@@ -18,13 +18,15 @@
         <option value="default">Filter by Keyword</option>
       </select>
       <button ><a href="./index.html"> Page 01</a></button><button><a href="./page2.html">Page 02</a></button>
+      <button id='titleSort'>Sort by title</button> <button id="hornSort">Sort by horns</button>
     </header>
     <main>
-      <template id="mustache-template2" type="text/x-tmpl-mustache">
-        <section class="template">
+      <template id="mustache-template" type="text/x-tmpl-mustache">
+        <div class="{{keyword}}">
             <h2>{{{title}}}</h2>
             <img src="{{image_url}}" alt="">
             <p>{{description}}</p>
+            <p>horns: {{horns}}</p>
         </section>
       </template>
     </main>
@@ -33,6 +35,6 @@
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
-    <script type="text/javascript" src="./js/app.js"></script>
+    <script type="text/javascript" src="./js/app2.js"></script>
   </body>
 </html>
