@@ -22,10 +22,11 @@
     </header>
     <main>
       <template id="mustache-template" type="text/x-tmpl-mustache">
-        <section class="template">
+        <div class="{{keyword}}">
             <h2>{{{title}}}</h2>
             <img src="{{image_url}}" alt="">
             <p>{{description}}</p>
+            <p>horns: {{horns}}</p>
         </section>
       </template>
     </main>
